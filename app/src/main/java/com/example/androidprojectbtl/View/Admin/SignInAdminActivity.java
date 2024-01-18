@@ -28,7 +28,8 @@ public class SignInAdminActivity extends AppCompatActivity  implements  View.OnC
         setContentView(R.layout.activity_sign_in_admin);
         InitWidget();
         Init();
-        btndangnhap.setOnClickListener(new View.OnClickListener() {
+        btndangnhap.setOnClickListener(new
+                                               View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SignInAdminActivity.this, HomeAdminActivity.class));
