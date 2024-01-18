@@ -89,7 +89,7 @@ public class GioHangModels {
                     }
                 });
     }
-    public  void HandlegetDataGioHang(){
+    public void HandlegetDataGioHang(){
         db.collection("GioHang").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .collection("ALL").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -106,8 +106,6 @@ public class GioHangModels {
                                                         d.getString("loaisp"),
                                                         s.getLong("soluong"),d.getString("nhasanxuat"),
                                                         d.getLong("type"),d.getString("trongluong"));
-
-
                                             }
                                         });
                             }

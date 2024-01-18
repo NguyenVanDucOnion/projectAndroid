@@ -84,7 +84,6 @@ public class SanPhamModels implements Serializable {
                     }
                 });
     }
-    //san pham thong thường
     public  void  HandlegetDataSanPham(){
         db.collection("SanPham").
                 whereEqualTo("type",1).

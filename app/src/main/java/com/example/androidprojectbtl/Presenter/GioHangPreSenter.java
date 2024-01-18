@@ -9,12 +9,10 @@ public class GioHangPreSenter implements  IGioHang{
     private GioHangModels gioHangModels;
     private GioHangView callback;
 
-    public GioHangPreSenter() {
+    public GioHangPreSenter( GioHangView callback) {
         this.callback = callback;
         gioHangModels  = new GioHangModels(this);
     }
-
-
     public  void AddCart(String idsp){
         gioHangModels.AddCart(idsp);
     }

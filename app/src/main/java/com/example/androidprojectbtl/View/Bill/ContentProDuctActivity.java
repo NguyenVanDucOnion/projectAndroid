@@ -57,7 +57,7 @@ public class ContentProDuctActivity extends AppCompatActivity implements GioHang
         txttensp.setText("Tên sản phẩm: "+sanPhamModels.getTensp());
         txtgiatien.setText("Giá tiền: "+ NumberFormat.getNumberInstance().format(sanPhamModels.getGiatien()));
         Picasso.get().load(sanPhamModels.getHinhanh()).into(hinhanh);
-        gioHangPreSenter = new GioHangPreSenter();
+        gioHangPreSenter = new GioHangPreSenter(this);
         btndathang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

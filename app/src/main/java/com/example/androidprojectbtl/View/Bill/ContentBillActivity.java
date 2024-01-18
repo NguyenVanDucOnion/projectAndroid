@@ -83,7 +83,7 @@ public class ContentBillActivity extends AppCompatActivity implements GioHangVie
 
 
 
-        gioHangPreSenter = new GioHangPreSenter();
+        gioHangPreSenter = new GioHangPreSenter(this);
         hoaDonPreSenter = new HoaDonPreSenter(this);
         arrayList = new ArrayList<>();
         if(type == 5){
