@@ -19,7 +19,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class SignInAdminActivity extends AppCompatActivity  implements  View.OnClickListener {
     private Button btndangnhap;
-    private EditText editemail, editpass;
+    private EditText editemail,editpass;
     private UserPreSenter userPreSenter;
 
     @Override
@@ -28,17 +28,17 @@ public class SignInAdminActivity extends AppCompatActivity  implements  View.OnC
         setContentView(R.layout.activity_sign_in_admin);
         InitWidget();
         Init();
-    }
-
-    private void Init() {
-
         btndangnhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SignInAdminActivity.this, HomeAdminActivity.class));
-                finish();
             }
         });
+    }
+
+    private void Init() {
+
+        btndangnhap.setOnClickListener(this);
 
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,28 +51,40 @@ public class SignInAdminActivity extends AppCompatActivity  implements  View.OnC
 
     private void InitWidget() {
         btndangnhap = findViewById(R.id.btndangnhap);
-        editemail = findViewById(R.id.editEmail);
+        editemail=findViewById(R.id.editEmail);
         editpass = findViewById(R.id.editmatkhau);
     }
 
 
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btndangnhap:
-                String username = editemail.getText().toString();
-                String pass = editpass.getText().toString().trim();
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection("Admin").whereEqualTo("username", username).whereEqualTo("pass", pass).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                            startActivity(new Intent(SignInAdminActivity.this, HomeAdminActivity.class));
-                            finish();
+        if (v.getId() == R.id.btndangnhap) {
+            String username = editemail.getText().toString();
+            String pass = editpass.getText().toString().trim();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            if (username.length() > 0) {
+                if (pass.length() > 0) {
+                    db.collection("Admin").
+                            whereEqualTo("username", username)
+                            .whereEqualTo("pass", pass).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(@NonNull QuerySnapshot queryDocumentSnapshots) {
+                                    if (queryDocumentSnapshots.size() > 0) {
+                                        startActivity(new Intent(SignInAdminActivity.this, HomeAdminActivity.class));
+                                        finish();
+                                    } else {
+                                        Toast.makeText(SignInAdminActivity.this, "Sai tài khoản / Mật khẩu", Toast.LENGTH_SHORT).show();
+                                    }
 
-                    }
-                });
-                    }
+                                }
+                            });
+                } else {
+
                 }
+            } else {
 
-
+            }
         }
+    }
+}
