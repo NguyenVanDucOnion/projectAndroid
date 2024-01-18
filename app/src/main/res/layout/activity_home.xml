@@ -30,7 +30,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+
         </androidx.appcompat.widget.Toolbar>
+
         <FrameLayout
             android:id="@+id/framelayout"
             android:layout_width="match_parent"
@@ -46,5 +48,8 @@
         app:headerLayout="@layout/app_bar_main_screen"
         android:id="@+id/navigationview"
         android:layout_height="match_parent"/>
+
+
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

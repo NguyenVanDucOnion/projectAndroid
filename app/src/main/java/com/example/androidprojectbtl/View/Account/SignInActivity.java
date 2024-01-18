@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.androidprojectbtl.Presenter.UserPreSenter;
 import com.example.androidprojectbtl.Presenter.UserView;
 import com.example.androidprojectbtl.R;
+import com.example.androidprojectbtl.View.Admin.SignInAdminActivity;
 import com.example.androidprojectbtl.View.HomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -39,13 +40,13 @@ public class SignInActivity  extends AppCompatActivity  implements UserView, Vie
 
             }
         });
-/*        findViewById(R.id.txtadmin).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent( SignInActivity.this, SignInAdminActivity.class));
+       findViewById(R.id.txtadmin).setOnClickListener(new View.OnClickListener() {
+           @Override
+         public void onClick(View v) {
+             startActivity(new Intent( SignInActivity.this, SignInAdminActivity.class));
 
-            }
-        });*/
+           }
+        });
 
     }
 
@@ -97,8 +98,8 @@ public class SignInActivity  extends AppCompatActivity  implements UserView, Vie
     /// ẤN đang nhap
     @Override
     public void onClick(View v) {
-        int viewId = v.getId();
-        if(viewId == R.id.btndangnhap){
+        switch (v.getId()) {
+            case  R.id.btndangnhap:
                 String email=editemail.getText().toString();
                 String pass =editpass.getText().toString().trim();
                 userPreSenter.HandleLoginUser(email,pass);

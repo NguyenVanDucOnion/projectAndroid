@@ -1,14 +1,14 @@
 package com.example.androidprojectbtl.Presenter;
 
-import com.example.androidprojectbtl.Model.UserModel;
+import com.example.androidprojectbtl.Model.UserModels;
 
 public class UserPreSenter implements IUSER{
-    private UserModel userModel;
+    private UserModels userModel;
     private  UserView callback;
 
         public UserPreSenter(UserView callback) {
             this.callback =callback;
-            userModel = new UserModel(this);
+            userModel = new UserModels(this);
     }
 
     public void HandleLoginUser(String email, String pass) {

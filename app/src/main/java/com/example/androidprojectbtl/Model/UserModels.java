@@ -8,14 +8,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class UserModel {
+public class UserModels {
     private FirebaseAuth firebaseAuth;
     private String valid_Email ="[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private  String email;
     private  String pass;
     private IUSER callback;
 
-    public UserModel(IUSER callback) {
+    public UserModels(IUSER callback) {
         this.callback =callback;
         firebaseAuth =FirebaseAuth.getInstance();
     }
