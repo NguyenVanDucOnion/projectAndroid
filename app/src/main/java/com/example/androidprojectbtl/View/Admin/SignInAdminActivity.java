@@ -32,7 +32,7 @@ public class SignInAdminActivity extends AppCompatActivity  implements  View.OnC
                                                View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SignInAdminActivity.this, HomeAdminActivity.class));
+                startActivity(new Intent(SignInAdminActivity.this, AdminHomeActivity.class));
             }
         });
     }
@@ -72,7 +72,7 @@ public class SignInAdminActivity extends AppCompatActivity  implements  View.OnC
                                 @Override
                                 public void onSuccess(@NonNull QuerySnapshot queryDocumentSnapshots) {
                                     if (queryDocumentSnapshots.size() > 0) {
-                                        startActivity(new Intent(SignInAdminActivity.this, HomeAdminActivity.class));
+                                        startActivity(new Intent(SignInAdminActivity.this, AdminHomeActivity.class));
                                         finish();
                                     } else {
                                         Toast.makeText(SignInAdminActivity.this, "Sai tài khoản / Mật khẩu", Toast.LENGTH_SHORT).show();
