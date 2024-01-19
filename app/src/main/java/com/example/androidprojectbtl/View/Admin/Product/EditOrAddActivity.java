@@ -6,7 +6,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,14 +30,16 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-public class EditOrAddActivity extends AppCompatActivity implements FirebaseHandler, ProductView, DatePickerDialog.OnDateSetListener {
+public class EditOrAddActivity extends AppCompatActivity implements FirebaseHandler, ProductView{
     EditText edtName;
     EditText edtPrice;
     EditText edtWeight;
@@ -63,7 +64,6 @@ public class EditOrAddActivity extends AppCompatActivity implements FirebaseHand
     private String id = "";
     private String oldImage;
     private boolean isAdding = false;
-    String[] items = new String[]{"KFC", "MicDonald", "JoyBee"};
 
     ActivityResultLauncher<PickVisualMediaRequest> pickMedia = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
         Picasso.get().load(uri).fit().centerCrop().into(imgPreview);
@@ -100,10 +100,8 @@ public class EditOrAddActivity extends AppCompatActivity implements FirebaseHand
         btnBack = findViewById(R.id.btn_add_back);
         if (!isAdd()) {
             loadDataIfEdit();
-        } else {
-            productPresenter.getLoaiSanPham();
-
         }
+        productPresenter.getLoaiSanPham();
         iniEvents();
     }
 
@@ -129,24 +127,7 @@ public class EditOrAddActivity extends AppCompatActivity implements FirebaseHand
         spnCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                categorySelected = items[i];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-    }
-
-    public void initSpinner(ProductModel productModel) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        spnCategory.setAdapter(adapter);
-        spnCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                categorySelected = items[i];
-                Toast.makeText(EditOrAddActivity.this, categorySelected, Toast.LENGTH_SHORT).show();
+                categorySelected = productCategories.get(i);
             }
 
             @Override
@@ -217,7 +198,7 @@ public class EditOrAddActivity extends AppCompatActivity implements FirebaseHand
                     }
                 } catch (Exception e) {
                     isAdding = false;
-                    showToast("Có lỗi xảy ra");
+                    showToast("Có lỗi xảy ra" + e.getMessage());
                 }
 
             }
@@ -276,7 +257,6 @@ public class EditOrAddActivity extends AppCompatActivity implements FirebaseHand
     public void OnGetOnceSuccess(Task<DocumentSnapshot> task) {
         if (task.isSuccessful()) {
             ProductModel productModel = task.getResult().toObject(ProductModel.class);
-            initSpinner(productModel);
             if (productModel.getHinhanh() != null) {
                 Picasso.get().load(productModel.getHinhanh()).fit().centerCrop().into(imgPreview);
             }
@@ -293,15 +273,5 @@ public class EditOrAddActivity extends AppCompatActivity implements FirebaseHand
         edtHanSuDung.setText(String.valueOf(productModel.getHansudung()));
         edtPrice.setText(String.valueOf(productModel.getGiatien()));
         oldImage = productModel.getHinhanh();
-    }
-
-    @Override
-    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, i);
-        calendar.set(Calendar.MONTH, i2);
-        calendar.set(Calendar.DAY_OF_MONTH, i2);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        dateConverted = simpleDateFormat.format(calendar.getTime());
     }
 }

@@ -104,7 +104,7 @@ public class ProductModel implements Serializable, IProduct {
         this.hinhanh = hinhanh;
     }
 
-    public float getGiatien() {
+    public long getGiatien() {
         return giatien;
     }
 
