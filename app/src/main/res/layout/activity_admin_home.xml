@@ -38,7 +38,8 @@
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:src="@drawable/bill"
-                    app:tint="#4CAF50" />
+                    app:tint="#4CAF50"
+                    android:id="@+id/ivhoadon"/>
 
                 <TextView
                     android:id="@+id/txtBill"

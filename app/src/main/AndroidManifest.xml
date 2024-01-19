@@ -22,6 +22,9 @@
         <activity
             android:name=".View.Admin.Product.EditOrAddActivity"
             android:exported="false" />
+
+        <activity android:name=".View.Admin.BillADMiNActivity"
+            android:exported="false" />
         <activity
             android:name=".View.Admin.Product.ListProductActivity"
             android:exported="false" />
@@ -47,9 +50,6 @@
             android:name=".View.Admin.SignInAdminActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".View.Admin.HomeAdminActivity"
-            android:exported="true" />
         <activity
             android:name=".View.FragMent.FragMent_Home"
             android:screenOrientation="portrait" />
